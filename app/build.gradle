@@ -4,6 +4,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-parcelize'
 
 android {
+    namespace 'com.sakib.devinfo'
     compileSdk 34
 
     defaultConfig {
