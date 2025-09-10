@@ -32,11 +32,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="16dp"
-                    app:indicatorSize="80dp"
-                    app:trackThickness="8dp"
-                    app:indicatorColor="@color/cpu_color"
-                    app:trackColor="@color/track_color" />
+                    android:layout_marginEnd="16dp" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -102,11 +98,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="16dp"
-                    app:indicatorSize="80dp"
-                    app:trackThickness="8dp"
-                    app:indicatorColor="@color/ram_color"
-                    app:trackColor="@color/track_color" />
+                    android:layout_marginEnd="16dp" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -164,11 +156,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="16dp"
-                    app:indicatorSize="80dp"
-                    app:trackThickness="8dp"
-                    app:indicatorColor="@color/storage_color"
-                    app:trackColor="@color/track_color" />
+                    android:layout_marginEnd="16dp" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -226,11 +214,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="16dp"
-                    app:indicatorSize="80dp"
-                    app:trackThickness="8dp"
-                    app:indicatorColor="@color/battery_color"
-                    app:trackColor="@color/track_color" />
+                    android:layout_marginEnd="16dp" />
 
                 <LinearLayout
                     android:layout_width="0dp"
