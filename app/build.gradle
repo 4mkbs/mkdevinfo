@@ -1,7 +1,9 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-parcelize'
+plugins {
+    id 'com.android.application' version '8.0.2'
+    id 'org.jetbrains.kotlin.android' version '1.8.20'
+    id 'org.jetbrains.kotlin.kapt'
+    id 'org.jetbrains.kotlin.plugin.parcelize'
+}
 
 android {
     namespace 'com.sakib.devinfo'

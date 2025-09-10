@@ -1,19 +1,6 @@
-buildscript {
-    ext.kotlin_version = "1.8.20"
-    repositories {
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:8.0.2'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
-// Project repositories are defined centrally in settings.gradle inside
-// dependencyResolutionManagement { repositories { ... } } due to
-// RepositoriesMode.FAIL_ON_PROJECT_REPOS. The previous allprojects { repositories { } }
-// block was removed to prevent Gradle from failing with
-// "Build was configured to prefer settings repositories over project repositories".
+// Root build.gradle now uses the plugins DSL only in module build files.
+// No repositories or buildscript block here to comply with
+// dependencyResolutionManagement { repositoriesMode = FAIL_ON_PROJECT_REPOS }.
 
 task clean(type: Delete) {
     delete rootProject.buildDir
