@@ -19,14 +19,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    android.util.Log.d("DevInfo", "MainActivity onCreate start")
 
         preferenceManager = PreferenceManager(this)
         applyTheme()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+    android.util.Log.d("DevInfo", "MainActivity layout set")
 
         setupBottomNavigation()
+    android.util.Log.d("DevInfo", "Bottom navigation setup complete")
     }
 
     private fun applyTheme() {
