@@ -206,6 +206,7 @@ jobs:
           prerelease: false
           files: |
             ./app-release*.apk
+          token: ${{ secrets.GITHUB_TOKEN }}
 
   notification:
     name: Send Notification
