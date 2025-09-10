@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_dashboard"
+        android:icon="@drawable/ic_dashboard"
+        android:title="@string/title_dashboard" />
+
+    <item
+        android:id="@+id/navigation_hardware"
+        android:icon="@drawable/ic_hardware"
+        android:title="@string/title_hardware" />
+
+    <item
+        android:id="@+id/navigation_system"
+        android:icon="@drawable/ic_system"
+        android:title="@string/title_system" />
+
+    <item
+        android:id="@+id/navigation_battery"
+        android:icon="@drawable/ic_battery"
+        android:title="@string/title_battery" />
+
+    <item
+        android:id="@+id/navigation_network"
+        android:icon="@drawable/ic_network"
+        android:title="@string/title_network" />
+
+    <item
+        android:id="@+id/navigation_apps"
+        android:icon="@drawable/ic_apps"
+        android:title="@string/title_apps" />
+
+    <item
+        android:id="@+id/navigation_camera"
+        android:icon="@drawable/ic_camera"
+        android:title="@string/title_camera" />
+
+    <item
+        android:id="@+id/navigation_sensors"
+        android:icon="@drawable/ic_sensors"
+        android:title="@string/title_sensors" />
+
+</menu>

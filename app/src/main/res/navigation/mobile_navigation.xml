@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_dashboard">
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.sakib.devinfo.ui.dashboard.DashboardFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/navigation_hardware"
+        android:name="com.sakib.devinfo.ui.hardware.HardwareFragment"
+        android:label="@string/title_hardware"
+        tools:layout="@layout/fragment_hardware" />
+
+    <fragment
+        android:id="@+id/navigation_system"
+        android:name="com.sakib.devinfo.ui.system.SystemFragment"
+        android:label="@string/title_system"
+        tools:layout="@layout/fragment_system" />
+
+    <fragment
+        android:id="@+id/navigation_battery"
+        android:name="com.sakib.devinfo.ui.battery.BatteryFragment"
+        android:label="@string/title_battery"
+        tools:layout="@layout/fragment_battery" />
+
+    <fragment
+        android:id="@+id/navigation_network"
+        android:name="com.sakib.devinfo.ui.network.NetworkFragment"
+        android:label="@string/title_network"
+        tools:layout="@layout/fragment_network" />
+
+    <fragment
+        android:id="@+id/navigation_apps"
+        android:name="com.sakib.devinfo.ui.apps.AppsFragment"
+        android:label="@string/title_apps"
+        tools:layout="@layout/fragment_apps" />
+
+    <fragment
+        android:id="@+id/navigation_camera"
+        android:name="com.sakib.devinfo.ui.camera.CameraFragment"
+        android:label="@string/title_camera"
+        tools:layout="@layout/fragment_camera" />
+
+    <fragment
+        android:id="@+id/navigation_sensors"
+        android:name="com.sakib.devinfo.ui.sensors.SensorsFragment"
+        android:label="@string/title_sensors"
+        tools:layout="@layout/fragment_sensors" />
+
+</navigation>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+       Declare the contents of this file to be backup-aware. If you do not want
+       to allow backup of its contents, change 'true' to 'false'.
+    -->
+    <full-backup-content>
+        <exclude domain="sharedpref" path="devinfo_preferences.xml" />
+    </full-backup-content>
+</resources>
