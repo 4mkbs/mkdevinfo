@@ -1,9 +1,11 @@
 # Gradle files
 .gradle/
 build/
-gradlew
-gradlew.bat
-gradle/wrapper/gradle-wrapper.jar
+# Keep gradlew and gradlew.bat - they are needed for CI/CD
+# gradlew
+# gradlew.bat
+# Keep gradle wrapper jar for CI/CD
+# gradle/wrapper/gradle-wrapper.jar
 
 # Local configuration file (sdk path, etc)
 local.properties
