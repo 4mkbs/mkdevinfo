@@ -9,14 +9,11 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
-
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        maven { url 'https://jitpack.io' }
-    }
-}
+// Project repositories are defined centrally in settings.gradle inside
+// dependencyResolutionManagement { repositories { ... } } due to
+// RepositoriesMode.FAIL_ON_PROJECT_REPOS. The previous allprojects { repositories { } }
+// block was removed to prevent Gradle from failing with
+// "Build was configured to prefer settings repositories over project repositories".
 
 task clean(type: Delete) {
     delete rootProject.buildDir
