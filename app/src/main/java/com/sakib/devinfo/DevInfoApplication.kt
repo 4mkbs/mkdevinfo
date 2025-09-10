@@ -10,6 +10,10 @@ class DevInfoApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        // Simple global crash logger to help diagnose release crashes while minify was enabled.
+        Thread.setDefaultUncaughtExceptionHandler { t, e ->
+            android.util.Log.e("DevInfoCrash", "Uncaught exception in thread ${t.name}", e)
+        }
         createNotificationChannels()
     }
 

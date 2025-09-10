@@ -24,7 +24,8 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
+            // Temporarily disable code shrinking to diagnose startup crash.
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.debug
         }
