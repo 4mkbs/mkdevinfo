@@ -1,6 +1,7 @@
 package com.sakib.devinfo.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
@@ -19,17 +20,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-    android.util.Log.d("DevInfo", "MainActivity onCreate start")
+    Log.d("DevInfo", "MainActivity onCreate start")
 
         preferenceManager = PreferenceManager(this)
         applyTheme()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-    android.util.Log.d("DevInfo", "MainActivity layout set")
+    Log.d("DevInfo", "MainActivity layout set")
 
         setupBottomNavigation()
-    android.util.Log.d("DevInfo", "Bottom navigation setup complete")
+    Log.d("DevInfo", "Bottom navigation setup complete")
     }
 
     private fun applyTheme() {
@@ -41,8 +42,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupBottomNavigation() {
-        val navView: BottomNavigationView = binding.navView
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+    val navView: BottomNavigationView = binding.navView
+    val navController = findNavController(R.id.nav_host_fragment_activity_main)
+    Log.d("DevInfo", "Obtained NavController: $navController")
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(
@@ -59,5 +61,30 @@ class MainActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        Log.d("DevInfo", "NavController + BottomNav wired")
+
+        // Log destination changes
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            Log.d(
+                "DevInfo",
+                "Destination changed -> ${destination.displayName} (id=${destination.id})"
+            )
+        }
+
+        // Fallback: after a short delay, ensure a child fragment exists; if not, force navigation
+        binding.root.postDelayed({
+            try {
+                val host = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)
+                val children = host?.childFragmentManager?.fragments ?: emptyList()
+                if (children.isEmpty()) {
+                    Log.w("DevInfo", "No child fragments found in NavHost after delay; forcing navigate to dashboard")
+                    navController.navigate(R.id.navigation_dashboard)
+                } else {
+                    Log.d("DevInfo", "Child fragments present: ${children.map { it::class.simpleName }}")
+                }
+            } catch (e: Exception) {
+                Log.e("DevInfo", "Fallback navigation error", e)
+            }
+        }, 1200)
     }
 }
