@@ -37,7 +37,7 @@
                     app:trackThickness="8dp"
                     app:indicatorColor="@color/cpu_color"
                     app:trackColor="@color/track_color"
-                    app:showAnimationBehavior="fade_in" />
+                    app:showAnimationBehavior="inward" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -108,7 +108,7 @@
                     app:trackThickness="8dp"
                     app:indicatorColor="@color/ram_color"
                     app:trackColor="@color/track_color"
-                    app:showAnimationBehavior="fade_in" />
+                    app:showAnimationBehavior="inward" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -171,7 +171,7 @@
                     app:trackThickness="8dp"
                     app:indicatorColor="@color/storage_color"
                     app:trackColor="@color/track_color"
-                    app:showAnimationBehavior="fade_in" />
+                    app:showAnimationBehavior="inward" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -234,7 +234,7 @@
                     app:trackThickness="8dp"
                     app:indicatorColor="@color/battery_color"
                     app:trackColor="@color/track_color"
-                    app:showAnimationBehavior="fade_in" />
+                    app:showAnimationBehavior="inward" />
 
                 <LinearLayout
                     android:layout_width="0dp"
