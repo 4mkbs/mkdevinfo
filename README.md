@@ -179,6 +179,27 @@ Ensure you have:
 adb shell am start -n com.sakib.devinfo/.ui.MainActivity
 ```
 
+### VS Code Workflow (No Android Studio)
+
+1. Run environment check:
+   ```bash
+   ./scripts/setup_env.sh
+   ```
+2. Open the Command Palette (Ctrl+Shift+P) → "Tasks: Run Task".
+3. Choose:
+   - `Gradle Assemble Debug APK` to compile
+   - `Gradle Install Debug APK` to push to the connected device
+   - `ADB Launch App` to start the activity
+   - `Logcat DevInfo Tag` to view runtime logs
+4. Modify code, re-run `Gradle Assemble Debug APK`, then `Gradle Install Debug APK`.
+
+Artifacts:
+
+- Debug APK: `app/build/outputs/apk/debug/app-debug.apk`
+- Release APK: `app/build/outputs/apk/release/app-release.apk`
+
+If `adb` cannot see your device: enable USB debugging, run `adb kill-server && adb start-server`, and check `adb devices` again.
+
 If multiple devices: `adb devices` then `adb -s <serial> shell am start -n ...`.
 
 ### Logs & Diagnostics
@@ -216,12 +237,12 @@ If `Destination changed` does not appear in 2s, open an issue with the full `Dev
 
 ### Troubleshooting
 
-| Symptom | Cause | Fix |
-|---------|-------|-----|
-| JAVA_HOME not set | Missing JDK path | Install JDK 17 or run via Android Studio |
-| Blank screen | Nav destination not attached | Check `DevInfo` logs; report absence of destination change |
-| Slow first build | Dependency download | Subsequent builds faster (cached) |
-| Permission denial | Runtime permission not granted | Grant requested permission in system dialog/settings |
+| Symptom           | Cause                          | Fix                                                        |
+| ----------------- | ------------------------------ | ---------------------------------------------------------- |
+| JAVA_HOME not set | Missing JDK path               | Install JDK 17 or run via Android Studio                   |
+| Blank screen      | Nav destination not attached   | Check `DevInfo` logs; report absence of destination change |
+| Slow first build  | Dependency download            | Subsequent builds faster (cached)                          |
+| Permission denial | Runtime permission not granted | Grant requested permission in system dialog/settings       |
 
 ### Faster Iteration
 

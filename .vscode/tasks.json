@@ -1,0 +1,51 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Gradle Assemble Debug APK",
+      "type": "shell",
+      "command": "./gradlew :app:assembleDebug",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Gradle Install Debug APK",
+      "type": "shell",
+      "command": "./gradlew :app:installDebug",
+      "dependsOn": ["Gradle Assemble Debug APK"],
+      "problemMatcher": []
+    },
+    {
+      "label": "ADB Launch App",
+      "type": "shell",
+      "command": "adb shell am start -n com.sakib.devinfo/.ui.MainActivity",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run Unit Tests",
+      "type": "shell",
+      "command": "./gradlew testDebugUnitTest",
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Clean Build",
+      "type": "shell",
+      "command": "./gradlew clean",
+      "problemMatcher": []
+    },
+    {
+      "label": "Assemble Release APK",
+      "type": "shell",
+      "command": "./gradlew :app:assembleRelease",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Logcat DevInfo Tag",
+      "type": "shell",
+      "command": "adb logcat -s DevInfo",
+      "problemMatcher": []
+    }
+  ]
+}
