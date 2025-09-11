@@ -120,18 +120,18 @@ The app requires the following permissions for full functionality:
 
 ### Prerequisites
 
-- Android Studio Arctic Fox or later
+- Android Studio Giraffe or later
 - JDK 17 or later
 - Android SDK 34
-- Gradle 8.3
+- Gradle 8.2.1 (wrapper included)
 
 ### Build Instructions
 
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/yourusername/devinfo.git
-   cd devinfo
+   git clone https://github.com/4mkbs/mkdevinfo.git
+   cd mkdevinfo
    ```
 
 2. **Open in Android Studio**
@@ -139,21 +139,97 @@ The app requires the following permissions for full functionality:
    - Open Android Studio
    - File → Open → Select the project directory
 
-3. **Build the project**
+3. **Build the project (first time)**
 
    ```bash
    ./gradlew build
    ```
 
-4. **Build APK**
+4. **Build APKs**
 
    ```bash
-   # Debug APK
-   ./gradlew assembleDebug
+   # Debug APK (fast iteration)
+   ./gradlew :app:assembleDebug
 
-   # Release APK
-   ./gradlew assembleRelease
+   # Release APK (minify currently disabled for diagnostics)
+   ./gradlew :app:assembleRelease
    ```
+
+## Run Locally (Device / Emulator)
+
+### Prerequisites
+
+Ensure you have:
+
+- SDK Platform 34 installed (Android Studio > SDK Manager)
+- JDK 17 (Android Studio bundles it; for CLI ensure JAVA_HOME points to JDK 17)
+- An emulator (API 30+) or physical device with USB debugging enabled
+
+### Android Studio Run
+
+1. Open the project root (folder containing `settings.gradle`).
+2. Let Gradle sync and download dependencies.
+3. Select a device/emulator.
+4. Press Run. The dashboard fragment should appear; if blank see Logcat steps below.
+
+### Command Line Run
+
+```bash
+./gradlew :app:installDebug
+adb shell am start -n com.sakib.devinfo/.ui.MainActivity
+```
+
+If multiple devices: `adb devices` then `adb -s <serial> shell am start -n ...`.
+
+### Logs & Diagnostics
+
+Filter logs by our tag:
+
+```bash
+adb logcat -s DevInfo
+```
+
+Expect lines:
+
+```
+DevInfo  MainActivity onCreate start
+DevInfo  MainActivity layout set
+DevInfo  Bottom navigation setup complete
+DevInfo  Obtained NavController: ...
+DevInfo  NavController + BottomNav wired
+DevInfo  Destination changed -> ...navigation_dashboard
+```
+
+If `Destination changed` does not appear in 2s, open an issue with the full `DevInfo` log output.
+
+### Unit Tests
+
+```bash
+./gradlew testDebugUnitTest
+```
+
+### Clean & Rebuild
+
+```bash
+./gradlew clean build --refresh-dependencies
+```
+
+### Troubleshooting
+
+| Symptom | Cause | Fix |
+|---------|-------|-----|
+| JAVA_HOME not set | Missing JDK path | Install JDK 17 or run via Android Studio |
+| Blank screen | Nav destination not attached | Check `DevInfo` logs; report absence of destination change |
+| Slow first build | Dependency download | Subsequent builds faster (cached) |
+| Permission denial | Runtime permission not granted | Grant requested permission in system dialog/settings |
+
+### Faster Iteration
+
+Use continuous build (Ctrl+C to stop):
+
+```bash
+./gradlew :app:assembleDebug -t
+```
 
 ## GitHub Actions CI/CD
 
@@ -259,7 +335,7 @@ _(Add screenshots of your app here)_
 
 If you encounter any issues or have questions:
 
-1. Check the [Issues](https://github.com/yourusername/devinfo/issues) page
+1. Check the [Issues](https://github.com/4mkbs/mkdevinfo/issues) page
 2. Create a new issue with detailed information
 3. Include device information and Android version
 
