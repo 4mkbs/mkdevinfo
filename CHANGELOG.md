@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.1.1] - 2025-09-20
+
+### Added
+- Continuous Integration workflow (`ci.yml`) for build + unit tests on pushes and PRs.
+- Automated release workflow (`android-release.yml`) attaching APK, AAB, and `mapping.txt` to tagged releases.
+- New adapters and data models for sensors and apps (ListAdapter + DiffUtil) improving UI efficiency.
+
+### Changed
+- Version bump: `versionCode` 3 / `versionName` 1.1.1.
+- Refined README with release/versioning and tagging instructions.
+
+### Fixed
+- Improved stability of sensor list updates (eliminated prior ANR conditions).
+
+### Internal
+- Ignored `keystore.b64` and reinforced shrink configuration.
+- ProGuard/R8 rules expanded (coroutines, sensor classes, annotations).
+
+
 ## [1.0.1] - 2025-09-20
 
 ### Added
