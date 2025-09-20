@@ -28,6 +28,9 @@
     <!-- Flashlight permission -->
     <uses-permission android:name="android.permission.FLASHLIGHT" />
     
+    <!-- Bluetooth permission -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    
     <!-- Battery optimization -->
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
     

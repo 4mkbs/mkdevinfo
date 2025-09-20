@@ -7,11 +7,6 @@
         android:title="@string/title_dashboard" />
 
     <item
-        android:id="@+id/navigation_hardware"
-        android:icon="@drawable/ic_hardware"
-        android:title="@string/title_hardware" />
-
-    <item
         android:id="@+id/navigation_system"
         android:icon="@drawable/ic_system"
         android:title="@string/title_system" />
@@ -30,15 +25,5 @@
         android:id="@+id/navigation_apps"
         android:icon="@drawable/ic_apps"
         android:title="@string/title_apps" />
-
-    <item
-        android:id="@+id/navigation_camera"
-        android:icon="@drawable/ic_camera"
-        android:title="@string/title_camera" />
-
-    <item
-        android:id="@+id/navigation_sensors"
-        android:icon="@drawable/ic_sensors"
-        android:title="@string/title_sensors" />
 
 </menu>

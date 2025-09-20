@@ -1,23 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.system.SystemFragment">
+    android:layout_height="wrap_content"
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="vertical">
 
-        <!-- Android OS Info Card -->
+        <!-- App Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <ImageView
+                android:id="@+id/ivAppIcon"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginEnd="16dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tvAppName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="App Name"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvPackageName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="com.example.package"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/darker_gray" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Basic Info Card -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:cardElevation="4dp"
+            android:layout_marginBottom="12dp"
+            app:cardElevation="2dp"
             app:cardCornerRadius="8dp">
 
             <LinearLayout
@@ -29,52 +67,52 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Android System"
-                    android:textSize="18sp"
+                    android:text="Basic Information"
+                    android:textSize="16sp"
                     android:textStyle="bold"
-                    android:layout_marginBottom="12dp" />
+                    android:layout_marginBottom="8dp" />
 
                 <TextView
-                    android:id="@+id/tvAndroidVersion"
+                    android:id="@+id/tvVersion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Android Version: Loading..."
+                    android:text="Version: 1.0"
                     android:textSize="14sp"
                     android:layout_marginBottom="4dp" />
 
                 <TextView
-                    android:id="@+id/tvApiLevel"
+                    android:id="@+id/tvTargetSdk"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="API Level: Loading..."
+                    android:text="Target SDK: 34"
                     android:textSize="14sp"
                     android:layout_marginBottom="4dp" />
 
                 <TextView
-                    android:id="@+id/tvSecurityPatch"
+                    android:id="@+id/tvMinSdk"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Security Patch: Loading..."
+                    android:text="Min SDK: 21"
                     android:textSize="14sp"
                     android:layout_marginBottom="4dp" />
 
                 <TextView
-                    android:id="@+id/tvBuildNumber"
+                    android:id="@+id/tvAppSize"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Build Number: Loading..."
+                    android:text="App Size: 50 MB"
                     android:textSize="14sp" />
 
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Kernel Info Card -->
+        <!-- Installation Info Card -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:cardElevation="4dp"
+            android:layout_marginBottom="12dp"
+            app:cardElevation="2dp"
             app:cardCornerRadius="8dp">
 
             <LinearLayout
@@ -86,36 +124,52 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Kernel Information"
-                    android:textSize="18sp"
+                    android:text="Installation Information"
+                    android:textSize="16sp"
                     android:textStyle="bold"
-                    android:layout_marginBottom="12dp" />
+                    android:layout_marginBottom="8dp" />
 
                 <TextView
-                    android:id="@+id/tvKernelVersion"
+                    android:id="@+id/tvInstallDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Kernel Version: Loading..."
+                    android:text="Installed: Jan 1, 2024"
                     android:textSize="14sp"
                     android:layout_marginBottom="4dp" />
 
                 <TextView
-                    android:id="@+id/tvUptime"
+                    android:id="@+id/tvUpdateDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="System Uptime: Loading..."
+                    android:text="Last Updated: Jan 1, 2024"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="4dp" />
+
+                <TextView
+                    android:id="@+id/tvAppType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Type: User App"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="4dp" />
+
+                <TextView
+                    android:id="@+id/tvAppStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Status: Enabled"
                     android:textSize="14sp" />
 
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Runtime Info Card -->
+        <!-- Permissions Card -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:cardElevation="4dp"
+            android:layout_marginBottom="12dp"
+            app:cardElevation="2dp"
             app:cardCornerRadius="8dp">
 
             <LinearLayout
@@ -127,43 +181,27 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Runtime Information"
-                    android:textSize="18sp"
+                    android:text="Permissions"
+                    android:textSize="16sp"
                     android:textStyle="bold"
-                    android:layout_marginBottom="12dp" />
+                    android:layout_marginBottom="8dp" />
 
-                <TextView
-                    android:id="@+id/tvJavaVersion"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvPermissions"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Java Version: Loading..."
-                    android:textSize="14sp"
-                    android:layout_marginBottom="4dp" />
-
-                <TextView
-                    android:id="@+id/tvVmVersion"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="VM Version: Loading..."
-                    android:textSize="14sp"
-                    android:layout_marginBottom="4dp" />
-
-                <TextView
-                    android:id="@+id/tvVmHeapSize"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="VM Heap Size: Loading..."
-                    android:textSize="14sp" />
+                    android:nestedScrollingEnabled="false"
+                    android:maxHeight="200dp" />
 
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- System Properties Card -->
+        <!-- File Paths Card -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardElevation="4dp"
+            app:cardElevation="2dp"
             app:cardCornerRadius="8dp">
 
             <LinearLayout
@@ -175,33 +213,27 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="System Properties"
-                    android:textSize="18sp"
+                    android:text="File Paths"
+                    android:textSize="16sp"
                     android:textStyle="bold"
-                    android:layout_marginBottom="12dp" />
+                    android:layout_marginBottom="8dp" />
 
                 <TextView
-                    android:id="@+id/tvTimeZone"
+                    android:id="@+id/tvSourceDir"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Time Zone: Loading..."
-                    android:textSize="14sp"
-                    android:layout_marginBottom="4dp" />
+                    android:text="APK Path: /system/app/..."
+                    android:textSize="12sp"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="monospace" />
 
                 <TextView
-                    android:id="@+id/tvLocale"
+                    android:id="@+id/tvDataDir"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Locale: Loading..."
-                    android:textSize="14sp"
-                    android:layout_marginBottom="4dp" />
-
-                <TextView
-                    android:id="@+id/tvBootTime"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Boot Time: Loading..."
-                    android:textSize="14sp" />
+                    android:text="Data Dir: /data/data/..."
+                    android:textSize="12sp"
+                    android:fontFamily="monospace" />
 
             </LinearLayout>
 

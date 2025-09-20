@@ -117,7 +117,7 @@ class FloatingOverlayService : Service() {
         updateRunnable = object : Runnable {
             override fun run() {
                 updateSystemInfo()
-                updateHandler.postDelayed(this, 1000)
+                updateHandler.postDelayed(this, 2000) // Update every 2 seconds to reduce load
             }
         }
         updateHandler.post(updateRunnable!!)

@@ -151,7 +151,7 @@ The app requires the following permissions for full functionality:
    # Debug APK (fast iteration)
    ./gradlew :app:assembleDebug
 
-   # Release APK (minify currently disabled for diagnostics)
+   # Release APK (optimized, shrinking enabled)
    ./gradlew :app:assembleRelease
    ```
 
@@ -267,33 +267,43 @@ This project includes a comprehensive GitHub Actions workflow that:
 - Caches Gradle dependencies for faster builds
 - Supports APK signing for releases
 
-### 🚀 Releasing
+### 🚀 Releasing (Updated for v1.0.1+)
 
-- Automatically creates GitHub releases for version tags
-- Uploads signed APKs to releases
-- Generates detailed release notes
+The repository includes `.github/workflows/android-release.yml` which triggers on pushing a tag that starts with `v`.
 
-### Setting up GitHub Actions
+1. Ensure you have created secrets:
+   - `RELEASE_KEYSTORE_BASE64` (Base64 of your `release.keystore`)
+   - `RELEASE_KEYSTORE_PASSWORD`
+   - `RELEASE_KEY_ALIAS`
+   - `RELEASE_KEY_PASSWORD`
+2. Bump `versionCode` and `versionName` in `app/build.gradle`.
+3. Update `CHANGELOG.md`.
+4. Commit and tag:
 
-1. **Create the following secrets in your GitHub repository:**
+```bash
+git add app/build.gradle CHANGELOG.md
+git commit -m "chore(release): v1.0.1"
+git tag v1.0.1
+git push origin main --follow-tags
+# or push tag separately
+git push origin v1.0.1
+```
 
-   - `SIGNING_KEY` - Base64 encoded keystore file
-   - `ALIAS` - Keystore alias
-   - `KEY_STORE_PASSWORD` - Keystore password
-   - `KEY_PASSWORD` - Key password
+5. Workflow builds:
+   - Release APK & AAB
+   - Uploads `mapping.txt`
+   - Creates GitHub Release with artifacts
 
-2. **To create a release:**
+If you lack a keystore, the build falls back to debug signing (NOT for production distribution).
 
-   ```bash
-   git tag v1.0.0
-   git push origin v1.0.0
-   ```
+### Local Keystore (Optional)
 
-3. **The workflow will automatically:**
-   - Run tests
-   - Build APKs
-   - Create a GitHub release
-   - Upload the APK to the release
+```bash
+keytool -genkeypair -v -keystore devinfo-release.keystore -alias devinfo \
+  -keyalg RSA -keysize 2048 -validity 3650
+base64 devinfo-release.keystore > keystore.b64
+# Copy contents of keystore.b64 into GitHub secret RELEASE_KEYSTORE_BASE64
+```
 
 ## Usage
 

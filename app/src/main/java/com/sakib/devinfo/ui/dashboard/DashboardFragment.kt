@@ -1,9 +1,5 @@
 package com.sakib.devinfo.ui.dashboard
 
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.os.BatteryManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -19,9 +15,8 @@ class DashboardFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
-    
     private lateinit var viewModel: DashboardViewModel
-    private val updateHandler = Handler(Looper.getMainLooper())
+    private var updateHandler: Handler? = null
     private var updateRunnable: Runnable? = null
 
     override fun onCreateView(
@@ -36,84 +31,50 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        
-        setupObservers()
+        updateHandler = Handler(Looper.getMainLooper())
         startUpdating()
-    }
-
-    private fun setupObservers() {
-        viewModel.cpuUsage.observe(viewLifecycleOwner) { usage ->
-            binding.cpuProgressCircular.progress = usage.toInt()
-            binding.cpuUsageText.text = "${usage.toInt()}%"
-        }
-
-        viewModel.memoryInfo.observe(viewLifecycleOwner) { (total, used, _) ->
-            val percentage = if (total > 0) ((used.toFloat() / total) * 100).toInt() else 0
-            binding.ramProgressCircular.progress = percentage
-            binding.ramUsageText.text = "$percentage%"
-            binding.ramDetailsText.text = "${SystemInfoUtils.formatBytes(used)} / ${SystemInfoUtils.formatBytes(total)}"
-        }
-
-        viewModel.storageInfo.observe(viewLifecycleOwner) { (total, used, _) ->
-            val percentage = if (total > 0) ((used.toFloat() / total) * 100).toInt() else 0
-            binding.storageProgressCircular.progress = percentage
-            binding.storageUsageText.text = "$percentage%"
-            binding.storageDetailsText.text = "${SystemInfoUtils.formatBytes(used)} / ${SystemInfoUtils.formatBytes(total)}"
-        }
-
-        viewModel.batteryInfo.observe(viewLifecycleOwner) { (level, temperature, voltage, health) ->
-            binding.batteryProgressCircular.progress = level
-            binding.batteryUsageText.text = "$level%"
-            binding.batteryDetailsText.text = "${temperature}°C • ${voltage}mV"
-        }
-
-        viewModel.networkStatus.observe(viewLifecycleOwner) { status ->
-            binding.networkStatusText.text = status
-        }
-
-        viewModel.uptime.observe(viewLifecycleOwner) { uptime ->
-            binding.uptimeText.text = SystemInfoUtils.formatUptime(uptime)
-        }
-
-        viewModel.cpuFrequencies.observe(viewLifecycleOwner) { frequencies ->
-            if (frequencies.isNotEmpty()) {
-                val maxFreq = frequencies.maxOrNull() ?: 0L
-                binding.cpuFrequencyText.text = SystemInfoUtils.formatFrequency(maxFreq * 1000)
-            }
-        }
-
-        viewModel.cpuTemperature.observe(viewLifecycleOwner) { temp ->
-            binding.cpuTemperatureText.text = "${temp.toInt()}°C"
-        }
     }
 
     private fun startUpdating() {
         updateRunnable = object : Runnable {
             override fun run() {
-                viewModel.updateSystemInfo(requireContext())
-                updateHandler.postDelayed(this, 1000) // Update every second
+                if (isAdded && _binding != null) {
+                    updateSystemInfo()
+                    updateHandler?.postDelayed(this, 3000) // Update every 3 seconds
+                }
             }
         }
-        updateHandler.post(updateRunnable!!)
+        updateHandler?.post(updateRunnable!!)
     }
 
-    private fun stopUpdating() {
-        updateRunnable?.let { updateHandler.removeCallbacks(it) }
-    }
+    private fun updateSystemInfo() {
+        try {
+            context?.let { ctx ->
+                val cpuUsage = SystemInfoUtils.getCpuUsage()
+                val memoryInfo = SystemInfoUtils.getMemoryInfo(ctx)
+                val storageInfo = SystemInfoUtils.getStorageInfo(ctx)
+                val batteryInfo = SystemInfoUtils.getBatteryInfo(ctx)
+                val networkStatus = SystemInfoUtils.getNetworkStatus(ctx)
+                val uptime = SystemInfoUtils.getUptime()
 
-    override fun onResume() {
-        super.onResume()
-        startUpdating()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        stopUpdating()
+                binding.apply {
+                    cpuUsageText.text = "CPU Usage: ${String.format("%.1f", cpuUsage)}%"
+                    ramUsageText.text = "RAM: ${SystemInfoUtils.formatBytes(memoryInfo.second)} / ${SystemInfoUtils.formatBytes(memoryInfo.first)}"
+                    storageUsageText.text = "Storage: ${SystemInfoUtils.formatBytes(storageInfo.second)} / ${SystemInfoUtils.formatBytes(storageInfo.first)}"
+                    batteryUsageText.text = "Battery: ${batteryInfo[0]}% (${batteryInfo[1]})"
+                    networkStatusText.text = "Network: $networkStatus"
+                    uptimeText.text = "Uptime: ${SystemInfoUtils.formatUptime(uptime)}"
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        stopUpdating()
+        updateRunnable?.let { updateHandler?.removeCallbacks(it) }
+        updateHandler = null
         _binding = null
     }
 }

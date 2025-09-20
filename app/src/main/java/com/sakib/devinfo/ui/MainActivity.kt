@@ -4,33 +4,73 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.sakib.devinfo.R
 import com.sakib.devinfo.databinding.ActivityMainBinding
+import com.sakib.devinfo.ui.dashboard.DashboardFragment
+import com.sakib.devinfo.ui.system.SystemFragment
+import com.sakib.devinfo.ui.battery.BatteryFragment
+import com.sakib.devinfo.ui.network.NetworkFragment
+import com.sakib.devinfo.ui.apps.AppsFragment
+import com.sakib.devinfo.ui.camera.CameraFragment
+import com.sakib.devinfo.ui.sensors.SensorsFragment
 import com.sakib.devinfo.utils.PreferenceManager
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var preferenceManager: PreferenceManager
+    private lateinit var viewPager: ViewPager2
+
+    private val fragments = listOf(
+        DashboardFragment(),
+        SystemFragment(),
+        BatteryFragment(),
+        NetworkFragment(),
+        AppsFragment(),
+        CameraFragment(),
+        SensorsFragment()
+    )
+
+    private val tabTitles = listOf(
+        "Dashboard",
+        "System", 
+        "Battery",
+        "Network",
+        "Apps",
+        "Camera",
+        "Sensors"
+    )
+
+    private val tabIcons = listOf(
+        R.drawable.ic_dashboard,
+        R.drawable.ic_system,
+        R.drawable.ic_battery,
+        R.drawable.ic_network,
+        R.drawable.ic_apps,
+        R.drawable.ic_camera,
+        R.drawable.ic_sensors
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-    Log.d("DevInfo", "MainActivity onCreate start")
+        Log.d("DevInfo", "MainActivity onCreate start")
 
         preferenceManager = PreferenceManager(this)
         applyTheme()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-    Log.d("DevInfo", "MainActivity layout set")
+        Log.d("DevInfo", "MainActivity layout set")
 
-        setupBottomNavigation()
-    Log.d("DevInfo", "Bottom navigation setup complete")
+        setupViewPager()
+        Log.d("DevInfo", "ViewPager setup complete")
     }
 
     private fun applyTheme() {
@@ -41,50 +81,34 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupBottomNavigation() {
-    val navView: BottomNavigationView = binding.navView
-    val navController = findNavController(R.id.nav_host_fragment_activity_main)
-    Log.d("DevInfo", "Obtained NavController: $navController")
+    private fun setupViewPager() {
+        viewPager = binding.viewPager
+        val tabLayout = binding.tabLayout
 
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_dashboard,
-                R.id.navigation_hardware,
-                R.id.navigation_system,
-                R.id.navigation_battery,
-                R.id.navigation_network,
-                R.id.navigation_apps,
-                R.id.navigation_camera,
-                R.id.navigation_sensors
-            )
-        )
+        // Set up ViewPager2 with adapter
+        val adapter = ViewPagerAdapter(this)
+        viewPager.adapter = adapter
 
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
-        Log.d("DevInfo", "NavController + BottomNav wired")
+        // Connect ViewPager2 with TabLayout
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            tab.text = tabTitles[position]
+            tab.setIcon(tabIcons[position])
+        }.attach()
 
-        // Log destination changes
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            Log.d(
-                "DevInfo",
-                "Destination changed -> ${destination.displayName} (id=${destination.id})"
-            )
-        }
-
-        // Fallback: after a short delay, ensure a child fragment exists; if not, force navigation
-        binding.root.postDelayed({
-            try {
-                val host = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)
-                val children = host?.childFragmentManager?.fragments ?: emptyList()
-                if (children.isEmpty()) {
-                    Log.w("DevInfo", "No child fragments found in NavHost after delay; forcing navigate to dashboard")
-                    navController.navigate(R.id.navigation_dashboard)
-                } else {
-                    Log.d("DevInfo", "Child fragments present: ${children.map { it::class.simpleName }}")
-                }
-            } catch (e: Exception) {
-                Log.e("DevInfo", "Fallback navigation error", e)
+        // Log page changes
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                Log.d("DevInfo", "Page selected: ${tabTitles[position]}")
             }
-        }, 1200)
+        })
+
+        // Start with Dashboard
+        viewPager.currentItem = 0
+    }
+
+    private inner class ViewPagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
+        override fun getItemCount(): Int = fragments.size
+        override fun createFragment(position: Int): Fragment = fragments[position]
     }
 }

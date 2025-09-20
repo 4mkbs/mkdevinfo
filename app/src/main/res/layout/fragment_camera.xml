@@ -1,15 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.camera.CameraFragment">
+    android:padding="16dp">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Camera Information\n\nComing soon..."
-        android:gravity="center"
-        android:textSize="18sp" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/tvCameraSupport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Camera Support: Checking..."
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvCameraCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Number of Cameras: Checking..."
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvFrontCamera"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Front Camera: Checking..."
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvBackCamera"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Back Camera: Checking..."
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvCameraPermission"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Camera Permission: Checking..."
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvFlashSupport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Flash Support: Checking..."
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvAutoFocus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Auto Focus: Checking..."
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvZoomSupport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Zoom Support: Checking..."
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvVideoRecording"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Video Recording: Checking..."
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvBackCameraResolution"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Back Camera Resolution: Checking..."
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvBackCameraAperture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Back Camera Aperture: Checking..."
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvBackCameraFocal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Back Camera Focal Length: Checking..."
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvBackCameraISO"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Back Camera ISO: Checking..."
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvFrontCameraResolution"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Front Camera Resolution: Checking..."
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvFrontCameraAperture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Front Camera Aperture: Checking..."
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvFrontCameraFocal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Front Camera Focal Length: Checking..."
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvFrontCameraFeatures"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Front Camera Features: Checking..."
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvVideoResolution"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Video Resolution: Checking..."
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvVideoFrameRate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Video Frame Rate: Checking..."
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvVideoStabilization"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Video Stabilization: Checking..."
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvSlowMotion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Slow Motion: Checking..."
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvCameraAPI"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Camera API: Checking..."
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvCamera2Support"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Camera2 Support: Checking..."
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvCameraHardwareLevel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hardware Level: Checking..."
+            android:layout_marginBottom="8dp" />
+
+    </LinearLayout>
+
+</ScrollView>

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_dashboard">
+    app:startDestination="@+id/navigation_system">
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_hardware"
-        android:name="com.sakib.devinfo.ui.hardware.HardwareFragment"
-        android:label="@string/title_hardware"
-        tools:layout="@layout/fragment_hardware" />
+        android:id="@+id/navigation_camera"
+        android:name="com.sakib.devinfo.ui.camera.CameraFragment"
+        android:label="@string/title_camera"
+        tools:layout="@layout/fragment_camera" />
 
     <fragment
         android:id="@+id/navigation_system"
@@ -40,17 +40,5 @@
         android:name="com.sakib.devinfo.ui.apps.AppsFragment"
         android:label="@string/title_apps"
         tools:layout="@layout/fragment_apps" />
-
-    <fragment
-        android:id="@+id/navigation_camera"
-        android:name="com.sakib.devinfo.ui.camera.CameraFragment"
-        android:label="@string/title_camera"
-        tools:layout="@layout/fragment_camera" />
-
-    <fragment
-        android:id="@+id/navigation_sensors"
-        android:name="com.sakib.devinfo.ui.sensors.SensorsFragment"
-        android:label="@string/title_sensors"
-        tools:layout="@layout/fragment_sensors" />
 
 </navigation>

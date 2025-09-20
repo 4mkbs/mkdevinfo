@@ -46,13 +46,13 @@ class DashboardViewModel : ViewModel() {
             // CPU Info
             val cpuUsageValue = SystemInfoUtils.getCpuUsage()
             val frequencies = SystemInfoUtils.getCpuFrequencies()
-            val temperature = SystemInfoUtils.getCpuTemperature()
+            val temperature = SystemInfoUtils.getCpuTemperature(context)
 
             // Memory Info
             val memInfo = SystemInfoUtils.getMemoryInfo(context)
 
             // Storage Info
-            val storageInfo = SystemInfoUtils.getStorageInfo(Environment.getDataDirectory().path)
+            val storageInfo = SystemInfoUtils.getStorageInfo(context)
 
             // Battery Info
             val batteryInfo = getBatteryInfo(context)
